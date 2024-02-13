@@ -1,4 +1,4 @@
-itimport React from 'react';
+ititimport React from 'react';
 import { useState,useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenSquare, faTrash,faFloppyDisk,faCircleXmark } from '@fortawesome/free-solid-svg-icons';
@@ -51,7 +51,7 @@ function App()
 
   async function saveEditItem(id)
   {
-    const response=await axios.put(`https://todo-withapi-aeaw.vercel.app/${id}`,{
+    const response=await axios.put(`https://todo-withapi-aeaw.vercel.app/edit/${id}`,{
       todo:editedItemName
     })
     fetchTodos()
