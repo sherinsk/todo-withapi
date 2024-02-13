@@ -51,7 +51,7 @@ function App()
 
   async function saveEditItem(id)
   {
-    const response=await axios.put(`https://todo-withapi-aeaw.vercel.app/edit/${id}`,{
+    const response=await axios.put(`https://todo-withapi-aeaw.vercel.app/${id}`,{
       todo:editedItemName
     })
     fetchTodos()
