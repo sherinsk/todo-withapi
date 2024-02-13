@@ -1,17 +1,10 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "app.js",
-      "use": "@now/node"
-    }
-  ],
-  "routes": [
-    {
-      // Specify which paths will route to a destination using a regex
-      "src": "/get",
-      // Specify the paths' destination
-      "dest": "app.js"
-    }
-  ]
+   "version": 2,
+   "name": "todo-withapi",
+   "builds": [
+      { "src": "app.js", "use": "@vercel/node" }
+   ],
+   "routes": [
+      { "src": "/(.*)", "dest": "/app.js" }
+   ]
 }
