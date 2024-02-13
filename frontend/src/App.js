@@ -1,4 +1,4 @@
-ititimport React from 'react';
+import React from 'react';
 import { useState,useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenSquare, faTrash,faFloppyDisk,faCircleXmark } from '@fortawesome/free-solid-svg-icons';
