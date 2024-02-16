@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenSquare, faTrash,faFloppyDisk,faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import './App.css';
+import SkeletonLoader from './components/skeletonLoader';
 import axios from 'axios'
 
 function App()
@@ -11,6 +12,7 @@ function App()
   const [input,setInput]=useState("")
   const [editingItemId,setEditingItemId]=useState(null)
   const [editedItemName,setEditedItemName]=useState("")
+  const [loading,setLoading]=useState(true)
 
   useEffect(()=>{fetchTodos();},[])
 
@@ -25,6 +27,7 @@ function App()
   {
     const response=await axios.get('http://localhost:8080/get');
     setTodo(response.data)
+    setLoading(false)
   }
 
   async function  deleteTodo(id)
@@ -91,36 +94,44 @@ function App()
           <div>
             <ul className="list-unstyled">
               {
-              todo.map((item)=>( <li key={item._id}>
-                {
-                  (editingItemId===item._id)?(<div className="bg-white border rounded mt-1 d-flex justify-content-between align-items-center">
-                  <input autoFocus type="input" onChange={handleInputChange} value={editedItemName} className="form-control-plaintext w-100 ms-2" />
-                  <div className="d-flex">
-                    <button className="btn btn-default" onClick={()=>saveEditItem(item._id)}  style={{ padding: 0, backgroundColor: 'transparent', border: 'none' }}>
-                    <FontAwesomeIcon icon={faFloppyDisk} /> {/* corrected icon name */}
-                    </button>
-                    <button className="btn btn-default ms-2 pe-2" onClick={()=>cancelEditItem(item._id)} style={{ padding: 0, backgroundColor: 'transparent', border: 'none' }}>
-                    <FontAwesomeIcon icon={faCircleXmark} /> {/* corrected icon name */}
-                    </button>
-                  </div>
-                </div>)
-                
-                :(<div className="bg-white rounded p-2 mt-1 d-flex justify-content-between align-items-center">
-                  <div className="task-description">
-                    <input type="checkbox" checked={item.status} onChange={()=>updateTodo(item._id)} />
-                    <label style={{textDecoration:item.status?'line-through':'none'}}>{' '+ item.todo}</label>
-                  </div>
-                  <div className="d-flex">
-                    <button className="btn btn-default" onClick={()=>handleEditItem(item)} style={{ padding: 0, backgroundColor: 'transparent', border: 'none' }}>
-                      <FontAwesomeIcon icon={faPenSquare} /> {/* corrected icon name */}
-                    </button>
-                    <button className="btn btn-default ms-2" onClick={()=>deleteTodo(item._id)}  style={{ padding: 0, backgroundColor: 'transparent', border: 'none' }}>
-                      <FontAwesomeIcon icon={faTrash} /> {/* corrected icon name */}
-                    </button>
-                  </div>
-                </div>)
-                }
-              </li>))
+                loading ? (
+                  <>
+                    {[...Array(4)].map((_, index) => (
+                      <li key={index}>
+                      <SkeletonLoader/>
+                      </li>
+                    ))}
+                  </>
+                ) : (todo.map((item)=>( <li key={item._id}>
+                  {
+                    (editingItemId===item._id)?(<div className="bg-white border rounded mt-1 d-flex justify-content-between align-items-center">
+                    <input autoFocus type="input" onChange={handleInputChange} value={editedItemName} className="form-control-plaintext w-100 ms-2" />
+                    <div className="d-flex">
+                      <button className="btn btn-default" onClick={()=>saveEditItem(item._id)}  style={{ padding: 0, backgroundColor: 'transparent', border: 'none' }}>
+                      <FontAwesomeIcon icon={faFloppyDisk} /> {/* corrected icon name */}
+                      </button>
+                      <button className="btn btn-default ms-2 pe-2" onClick={()=>cancelEditItem(item._id)} style={{ padding: 0, backgroundColor: 'transparent', border: 'none' }}>
+                      <FontAwesomeIcon icon={faCircleXmark} /> {/* corrected icon name */}
+                      </button>
+                    </div>
+                  </div>)
+                  
+                  :(<div className="bg-white rounded p-2 mt-1 d-flex justify-content-between align-items-center">
+                    <div className="task-description">
+                      <input type="checkbox" checked={item.status} onChange={()=>updateTodo(item._id)} />
+                      <label style={{textDecoration:item.status?'line-through':'none'}}>{' '+ item.todo}</label>
+                    </div>
+                    <div className="d-flex">
+                      <button className="btn btn-default" onClick={()=>handleEditItem(item)} style={{ padding: 0, backgroundColor: 'transparent', border: 'none' }}>
+                        <FontAwesomeIcon icon={faPenSquare} /> {/* corrected icon name */}
+                      </button>
+                      <button className="btn btn-default ms-2" onClick={()=>deleteTodo(item._id)}  style={{ padding: 0, backgroundColor: 'transparent', border: 'none' }}>
+                        <FontAwesomeIcon icon={faTrash} /> {/* corrected icon name */}
+                      </button>
+                    </div>
+                  </div>)
+                  }
+                </li>)))
               }
             </ul>
           </div>

@@ -10,3 +10,43 @@
 h2{
   font-family: 'Protest Revolution', sans-serif;
 }
+
+.skeleton {
+  min-height: 50px; /* Adjust according to your design */
+}
+
+.skeleton-checkbox {
+  width: 20px;
+  height: 20px;
+  background-color: #eee;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.skeleton-text {
+  width: 150px;
+  height: 20px;
+  background-color: #eee;
+  border-radius: 4px;
+}
+
+.skeleton-button {
+  width: 30px;
+  height: 30px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* Animation */
+@keyframes skeleton-animation {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+.skeleton div {
+  animation: skeleton-animation 1.5s infinite;
+}
+
+/* Adjust animation timing and other properties as needed */
+
