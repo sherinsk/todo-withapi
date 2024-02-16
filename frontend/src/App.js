@@ -14,7 +14,7 @@ function App()
   const [editedItemName,setEditedItemName]=useState("")
   const [loading,setLoading]=useState(true)
 
-  useEffect(()=>{fetchTodos();},[todon])
+  useEffect(()=>{fetchTodos();},[todo])
 
   async function updateTodo(id)
   {
