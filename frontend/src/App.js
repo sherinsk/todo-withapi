@@ -18,21 +18,21 @@ function App()
 
   async function updateTodo(id)
   {
-    const response=await axios.get(`http://localhost:8080/get/${id}`)
+    const response=await axios.get(`https://todo-withapi-aeaw.vercel.app/get/${id}`)
     fetchTodos()
   }
 
 
   async function  fetchTodos()
   {
-    const response=await axios.get('http://localhost:8080/get');
+    const response=await axios.get('https://todo-withapi-aeaw.vercel.app/get');
     setTodo(response.data)
     setLoading(false)
   }
 
   async function  deleteTodo(id)
   {
-    const response=await axios.delete(`http://localhost:8080/delete/${id}`);
+    const response=await axios.delete(`https://todo-withapi-aeaw.vercel.app/delete/${id}`);
     fetchTodos()
   }
 
@@ -44,7 +44,7 @@ function App()
 
   async function submit()
   {
-    const response=await axios.post('http://localhost:8080/post',{
+    const response=await axios.post('https://todo-withapi-aeaw.vercel.app/post',{
       todo:input,
       status:false
     });
@@ -54,7 +54,7 @@ function App()
 
   async function saveEditItem(id)
   {
-    const response=await axios.put(`http://localhost:8080/edit/${id}`,{
+    const response=await axios.put(`https://todo-withapi-aeaw.vercel.app/edit/${id}`,{
       todo:editedItemName
     })
     fetchTodos()

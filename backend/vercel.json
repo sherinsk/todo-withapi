@@ -1,19 +1,10 @@
 {
-  "builds": [
-    { "src": "packages/www/package.json", "use": "@now/next" },
-    {
-      "src": "packages/admin/package.json",
-      "use": "@now/static-build"
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/admin/(.*)",
-      "destination": "/packages/admin/index.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/packages/www/$1"
-    }
-  ]
+   "version": 2,
+   "name": "todo-withapi",
+   "builds": [
+      { "src": "app.js", "use": "@vercel/node" }
+   ],
+   "routes": [
+      { "src": "/(.*)", "dest": "/app.js" }
+   ]
 }

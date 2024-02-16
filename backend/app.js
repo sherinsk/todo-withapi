@@ -10,7 +10,11 @@ var app = express();
 
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
-app.use(cors())
+app.use(cors({
+  origin: 'https://todo-withapi-oias.vercel.app',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+}))
+
 
 todomodel=require('./models/todo.js')
 
